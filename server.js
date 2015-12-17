@@ -25,7 +25,7 @@ var Hapi = require('hapi'),
         },
         spa: {
             method: 'GET',
-            path: '/{path*}',
+            path: '/',
             handler: {
                 file: path.join(__dirname, '/dist/index.html')
             }

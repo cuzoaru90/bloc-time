@@ -1,0 +1,82 @@
+html {
+  height: 100%; /* makes sure our HTML takes up 100% of the browser window */
+}
+ 
+ body {
+   background-size: cover;
+   font-family: 'Open Sans'; /* sets our font to the "Open Sans" typeface */
+   color: red;             /* sets the text color to white */
+   min-height: 100%;         /* says the height of the body must be, at minimum, 100% of the window */
+   padding-bottom: 150px;
+ }
+ 
+
+ *, *:before, *:after {
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+ }
+
+.container {
+   margin: 0 auto;
+   max-width: 64rem;
+ }
+
+.container.narrow {
+   max-width: 56rem;
+ }
+
+ .task-button {
+    text-align: center;
+    font-size: 14px;
+    background-color: blue;
+    color: white;
+    border:1px solid #566963;
+    display: inline-block;
+    width: 100px;
+    height: 28px;
+ }
+
+ .time-field{
+   width: 85%;
+   font-size: 35px;
+ }
+
+ .center{
+   margin-top: 200px;
+   margin-left: 50%;
+ }
+
+  /* Medium and small screens (640px) */
+ @media (min-width: 40rem) {
+
+   html { font-size: 112%; }
+
+   .column {
+         float: left;
+         padding-left: 1rem;
+         padding-right: 1rem;
+     }
+
+   .column.full { width: 100%; }
+   .column.two-thirds { width: 66.7%; }
+   .column.half { width: 50%; }
+   .column.third { width: 33.3%; }
+   .column.fourth { width: 25%; }
+   .column.flow-opposite { float: right; }  
+ }
+ 
+ /* Large screens (1024px) */
+ @media (min-width: 64rem) {
+   html { font-size: 120%; }
+ }
+
+.clearfix:before,
+.clearfix:after {
+   content: " ";
+   display: table;
+}
+
+.clearfix:after {
+   clear: both;
+}
