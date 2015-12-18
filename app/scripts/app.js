@@ -13,9 +13,11 @@
 
     app.controller('taskCtrl', ['$scope', '$interval', function($scope, $interval) {
 
-        $scope.time = (60*25);
+        $scope.time = 1500;
 
         $scope.taskName = 'Start';
+
+        $scope.onBreak = false;
 
         var stop;
 
@@ -24,8 +26,23 @@
           if ( angular.isDefined(stop) ) return;
           
           stop = $interval(function() {
-            $scope.time -= 1;
-          }, 1000);
+            if ($scope.time > 0 ){
+              $scope.time -= 1;
+            }
+            else{
+              $scope.stopTime();
+                if (!$scope.onBreak){
+                  $scope.onBreak = true;
+                  $scope.taskName = 'Break';
+                  $scope.time = 300;
+                }
+                else{
+                  $scope.onBreak = false;
+                  $scope.taskName = 'Start';
+                  $scope.time = 1500;
+                }
+            }
+          }, 1);
 
           $scope.taskName = 'Reset';
         };
@@ -35,22 +52,33 @@
             $interval.cancel(stop);
             stop = undefined;
           }
-          $scope.taskName = 'Start';
+          if (!$scope.onBreak){
+            $scope.taskName = 'Start';
+          }
+          else{
+            $scope.taskName = 'Break';
+          }
         };
 
         $scope.reset = function() {
           $scope.stopTime();
-          $scope.time = (60*25);
+          if (!$scope.onBreak){
+            $scope.time = (1500);
+          }
+          else{
+            $scope.time = 300;
+          }
         };
 
         $scope.startReset = function() {
-          if ($scope.taskName == 'Start' ){
+          if ($scope.taskName == 'Start' || $scope.taskName == 'Break' ){
             $scope.countdown();
           }
           else{
             $scope.reset();
           }
         };
+
 
 
       }]);

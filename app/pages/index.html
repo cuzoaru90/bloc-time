@@ -16,7 +16,8 @@
 
     <div class="container center">
       <div class="time-field">{{time | timecode}}</div>
-      <a class="task-button" ng-click="startReset()">{{taskName}}</a> <br>
+      <span class="task-button" ng-show = "!onBreak" ng-click="startReset()">{{taskName}}</span> <br>
+      <span class="task-button" ng-show = "onBreak" ng-click="startReset()">{{taskName}}</span> <br>
     </div>
 
 
