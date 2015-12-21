@@ -37,13 +37,18 @@ html {
     height: 28px;
  }
 
+ .task-button:hover {
+    cursor: pointer;
+    color: red;
+ }
+
  .time-field{
    width: 85%;
    font-size: 35px;
  }
 
  .center{
-   margin-top: 200px;
+   margin-top: 50px;
    margin-left: 50%;
  }
 
