@@ -13,16 +13,45 @@
 
     app.controller('taskCtrl', ['$scope', '$interval', function($scope, $interval) {
 
-        $scope.time = 1500;
+        var SESSION_TIME = 1500;
+        var breakTime = 300;
+
+        var stop;
+
+        $scope.time = SESSION_TIME;
+
+        $scope.numSessions = 0;
 
         $scope.taskName = 'Start';
 
         $scope.onBreak = false;
 
-        var stop;
+        /* Starts a 5-minute break (30-minute break after every four completed sessions) */
+        $scope.takeBreak = function(){
+          $scope.onBreak = true;
+          $scope.taskName = 'Break';
+          $scope.numSessions++;
 
+          if ($scope.numSessions % 4 != 0){
+            breakTime = 300;
+          }
+          else{
+            breakTime = 1800;
+          }
+
+          $scope.time = breakTime;
+        };
+        
+        /* Starts a 25-minute session */
+        $scope.startSession = function(){
+          $scope.onBreak = false;
+          $scope.taskName = 'Start';
+          $scope.time = SESSION_TIME;
+        };
+
+        /* Countdown function starts the timer for both sessions and breaks. New sessions and breaks start when timer is 0 */
         $scope.countdown = function() {
-
+          
           if ( angular.isDefined(stop) ) return;
           
           stop = $interval(function() {
@@ -32,21 +61,18 @@
             else{
               $scope.stopTime();
                 if (!$scope.onBreak){
-                  $scope.onBreak = true;
-                  $scope.taskName = 'Break';
-                  $scope.time = 300;
+                  $scope.takeBreak();
                 }
                 else{
-                  $scope.onBreak = false;
-                  $scope.taskName = 'Start';
-                  $scope.time = 1500;
+                  $scope.startSession();
                 }
             }
           }, 1000);
 
           $scope.taskName = 'Reset';
         };
-
+        
+        /* Function stopTime stops the timer during sessions and breaks */
         $scope.stopTime = function() {
           if (angular.isDefined(stop)) {
             $interval.cancel(stop);
@@ -60,16 +86,18 @@
           }
         };
 
+        /* Function reset makes the timer start at the beginning of a session or break */
         $scope.reset = function() {
           $scope.stopTime();
           if (!$scope.onBreak){
-            $scope.time = (1500);
+            $scope.time = SESSION_TIME;
           }
           else{
-            $scope.time = 300;
+            $scope.time = breakTime;
           }
         };
 
+        /* Function starts or resets depending on whether the timer is counting or paused */
         $scope.startReset = function() {
           if ($scope.taskName == 'Start' || $scope.taskName == 'Break' ){
             $scope.countdown();
@@ -78,7 +106,5 @@
             $scope.reset();
           }
         };
-
-
 
       }]);
