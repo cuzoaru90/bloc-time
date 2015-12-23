@@ -18,6 +18,10 @@
 
         var stop;
 
+        var dingSound = new buzz.sound( "assets/sounds/ding_ling.mp3", {
+          preload: true
+        });
+
         $scope.time = SESSION_TIME;
 
         $scope.numSessions = 0;
@@ -71,6 +75,13 @@
 
           $scope.taskName = 'Reset';
         };
+
+        /* Function watch waits for the timer to hit zero and plays a ding */
+        $scope.$watch('time', function(value) {
+           if (value == 0){ 
+             dingSound.play();
+           } 
+        });
         
         /* Function stopTime stops the timer during sessions and breaks */
         $scope.stopTime = function() {
