@@ -1,16 +1,18 @@
-## Bloc Frontend Project Starter
+## Bloctime 
 
-A starter application for student projects in Bloc's [Frontend Web Development Course](https://www.bloc.io/frontend-development-bootcamp).
+A time-management app that helps the user complete tasks.
+The Bloctime app can be viewed at {https://arcane-thicket-5484.herokuapp.com}.
+Read the next sections to configure, run, and test the app.
 
 ## Configuration
 
 Start by cloning the repository:
 
 ```
-$ git clone https://github.com/Bloc/bloc-frontend-project-starter.git <your-frontend-project-name>
+$ git clone https://github.com/cuzoaru90/bloc-time.git
 ```
 
-The project uses Grunt to run tasks in development. Thoroughly review our [resource on using Grunt](https://www.bloc.io/resources/using-grunt) before using this application. It may also help to review [our resource on NPM and `package.json` files](https://www.bloc.io/resources/npm-and-package-json).
+The project uses Grunt to run tasks in development. Thoroughly review the [resource on using Grunt](https://www.bloc.io/resources/using-grunt) before using this application. It may also help to review [the resource on NPM and `package.json` files](https://www.bloc.io/resources/npm-and-package-json).
 
 Install the project dependencies by running:
 
@@ -97,7 +99,7 @@ The `Procfile` is a file for [providing instructions to Heroku servers](https://
 
 ## Configure Server for Non-SPAs
 
-By default, `bloc-frontend-project-starter` is configured to be used with SPAs. If you're not building a project with Angular, then modify `server.js` with the following:
+By default, `Bloctime` is configured to be used with SPAs. If you're not building a project with Angular, then modify `server.js` with the following:
 
 ```diff
 var Hapi = require('hapi'),
