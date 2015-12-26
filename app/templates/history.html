@@ -5,13 +5,18 @@
 </head>
 <body>
 
+
 <ul>
   <h2>Task History</h2>
 
   <form>
-    <input type="text"> <br>
-    <a class="task-button">Add task</a> <br>
+    <input type="text" id= "taskInput" placeholder= "Enter task name"> <br>
   </form> <br>
+
+  <div id='tasks' ng-repeat="task in tasks">
+    <li> {{ task.taskName }}</li> <br>
+  </div>
+
 </ul>
 
 </body>
