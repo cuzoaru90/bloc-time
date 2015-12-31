@@ -17,9 +17,13 @@ html {
      box-sizing: border-box;
  }
 
+
 .container {
-   margin: 0 auto;
    max-width: 64rem;
+ }
+
+ .fixed{
+   position: fixed; 
  }
 
 .container.narrow {
@@ -39,7 +43,7 @@ html {
 
  .task-button:hover {
     cursor: pointer;
-    color: red;
+    opacity: 0.75;
  }
 
  .time-field{
@@ -48,7 +52,7 @@ html {
  }
 
  .center{
-   margin-top: 50px;
+   margin-top: 300px;
    margin-left: 50%;
  }
 
