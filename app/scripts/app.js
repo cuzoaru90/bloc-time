@@ -131,10 +131,12 @@
           }
 
         };
-
+        
+        /* Function adds the name of the current task to the history sidebar after session timer hits zero */
         $scope.addHistory = function(){
           var input = $('#taskInput').val();
           $scope.tasks.$add({taskName: input});
+          $('#taskInput').val('');
         };
 
       }]);
