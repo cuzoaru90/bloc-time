@@ -1,22 +1,35 @@
     var app = angular.module("blocTime", ['firebase', 'ui.router']);
-    var myDataRef = new Firebase('https://shining-torch-8271.firebaseio.com/');
+
+    app.factory('Tasks', ['$firebaseArray', function($firebaseArray) {
+
+      var myDataRef = new Firebase('https://shining-torch-8271.firebaseio.com/');
+
+      var tasks = $firebaseArray(myDataRef);
+
+      return tasks;
+
+    }]);
     
     app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');     
     $stateProvider
       .state('history', {
       url: '/',
-      controller: 'HistoryCtrl as history',
+      controller: 'taskCtrl',
       templateUrl: '/templates/history.html'
       });
     });
 
-    app.controller('taskCtrl', ['$scope', '$interval', function($scope, $interval) {
+    app.controller('taskCtrl', ['$scope', '$interval', 'Tasks', function($scope, $interval, tasks) {
 
         var SESSION_TIME = 1500;
         var breakTime = 300;
 
         var stop;
+
+        var dingSound = new buzz.sound( "assets/sounds/ding_ling.mp3", {
+          preload: true
+        });
 
         $scope.time = SESSION_TIME;
 
@@ -25,6 +38,9 @@
         $scope.taskName = 'Start';
 
         $scope.onBreak = false;
+
+        $scope.tasks = tasks;
+
 
         /* Starts a 5-minute break (30-minute break after every four completed sessions) */
         $scope.takeBreak = function(){
@@ -61,6 +77,7 @@
             else{
               $scope.stopTime();
                 if (!$scope.onBreak){
+                  $scope.addHistory();
                   $scope.takeBreak();
                 }
                 else{
@@ -71,6 +88,13 @@
 
           $scope.taskName = 'Reset';
         };
+
+        /* Function watch waits for the timer to hit zero and plays a ding */
+        $scope.$watch('time', function(value) {
+           if (value == 0){ 
+             dingSound.play();
+           } 
+        });
         
         /* Function stopTime stops the timer during sessions and breaks */
         $scope.stopTime = function() {
@@ -105,6 +129,14 @@
           else{
             $scope.reset();
           }
+
+        };
+        
+        /* Function adds the name of the current task to the history sidebar after session timer hits zero */
+        $scope.addHistory = function(){
+          var input = $('#taskInput').val();
+          $scope.tasks.$add({taskName: input});
+          $('#taskInput').val('');
         };
 
       }]);
