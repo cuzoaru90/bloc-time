@@ -12,14 +12,13 @@
   </head>
   <body>
 
-    <ui-view> </ui-view>
-
-    <div class="container center">
+    <div class="container center fixed">
       <div class="time-field">{{time | timecode}}</div>
       <span class="task-button" ng-show = "!onBreak" ng-click="startReset()">{{taskName}}</span> <br>
       <span class="task-button" ng-show = "onBreak" ng-click="startReset()">{{taskName}}</span> <br>
-    </div>
+   </div>
 
+   <ui-view> </ui-view>
 
   </body>
   

@@ -5,7 +5,6 @@
 </head>
 <body>
 
-
 <ul>
   <h2>Task History</h2>
 
@@ -13,7 +12,7 @@
     <input type="text" id= "taskInput" placeholder= "Enter task name"> <br>
   </form> <br>
 
-  <div id='tasks' ng-repeat="task in tasks">
+  <div id='tasks' ng-repeat="task in tasks | orderBy: 'task': 'reverse' ">
     <li> {{ task.taskName }}</li> <br>
   </div>
 
