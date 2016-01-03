@@ -1,7 +1,7 @@
 ## Bloctime 
 
 A time-management app that helps the user complete tasks.
-The Bloctime app can be viewed at {https://arcane-thicket-5484.herokuapp.com}.
+The Bloctime app can be viewed at [here](https://chucku-bloc-time.herokuapp.com/).
 Read the next sections to configure, run, and test the app.
 
 ## Configuration
